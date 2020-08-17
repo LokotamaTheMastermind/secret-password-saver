@@ -1,0 +1,5 @@
+src/ProjectHeart/__pycache__/
+src/ProjectHeart/migrations/*
+src/ProjectHeart/migrations/__pycache__/
+src/PasswordVault/__pycache__/
+src/db.sqlite3
