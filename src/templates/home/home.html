@@ -1,27 +1,26 @@
 {% extends 'shared/base.html' %}
 
-<html>
-<head>
-  <title>Secret Password Saver</title>
-</head>
-<body>
-  {% block content %}
-  <div class="uk-container">
-    <h1 class="uk-h1">Hello World</h1>
-    <hr class="uk-hr">
-    <div class="uk-column">
-      <form action="" method="post">
-        {% csrf_token %}
-        <label>{{ form.password.label }}</label><br>
-        {{ form.password }}<br>
-        <label>{{ form.website_url.label }}</label><br>
-        {{ form.website_url }}<br>
-        <label>{{ form.website_name.label }}</label><br>
-        {{ form.website_name }}<br><br>
-        <input type="submit" value="Submit" class="uk-button">
-      </form>
-    </div>
+{% block content %}
+<div class="uk-container" style="margin-top : 15%;">
+  <h1 class="uk-h1">Welcome</h1>
+  <hr class="uk-hr">
+  {% if request.user.is_authenticated %}
+  <div class="uk-column">
+    <form action="" method="post">
+      {% csrf_token %}
+      <label>{{ form.password.label }}</label><br>
+      {{ form.password }}<br>
+      <label>{{ form.website_url.label }}</label><br>
+      {{ form.website_url }}<br>
+      <label>{{ form.website_name.label }}</label><br>
+      {{ form.website_name }}<br><br>
+      <input type="submit" value="Submit" class="uk-button">
+    </form>
   </div>
-  {% endblock content %}
-</body>
-</html>
+  {% endif %}
+</div>
+{% endblock content %}
+
+{% block title %}
+  Home
+{% endblock title %}

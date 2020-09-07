@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Secret Password Saver -> {% block title %}{% endblock title %}</title>
+  <title>Secret Password Saver - {% block title %}{% endblock title %}</title>
   <link rel="stylesheet" href="{% static 'lib/uikit/css/uikit-rtl.css' %}">
   <link rel="stylesheet" href="{% static 'lib/uikit/css/uikit-rtl.min.css' %}">
   <link rel="stylesheet" href="{% static 'lib/uikit/css/uikit.css' %}">
@@ -12,16 +12,13 @@
   <script src="{% static 'lib/uikit/js/uikit-icons.js' %}"></script>
   <script src="{% static 'lib/uikit/js/uikit-icons.min.js' %}"></script>
 
-  {% block extra_css %}
-  {% endblock extra_css %}
+  {% block stylesheets %}
+  {% endblock stylesheets %}
 </head>
 <body>
-  {% block content %}
-  {% endblock content %}
 
-  <script>
-    {% block execute_javascript %}
-    {% endblock execute_javascript %}
-  </script>
+{% block content %}
+{% endblock content %}
+
 </body>
 </html>
