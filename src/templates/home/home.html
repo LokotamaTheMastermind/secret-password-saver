@@ -1,9 +1,17 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<div class="uk-container" style="margin-top : 15%;">
-  <h1 class="uk-h1">Welcome</h1>
-  <hr class="uk-hr">
+<!-- Main content -->
+<div class="uk-container uk-margin-medium-top">
+  {% if created %}
+  <div class="uk-card uk-card-primary">
+    <div class="uk-card-body uk-text-light">
+      <p>Successfully created password for user <code>{{ request.user }}</code></p>
+    </div>
+  </div>
+  {% endif %}
+  <h1 class="uk-h1 uk-text-center">Easy Password Saver</h1>
+  <hr class="uk-hr uk-align-center">
   {% if request.user.is_authenticated %}
   <div class="uk-column">
     <form action="" method="post">
@@ -14,13 +22,20 @@
       {{ form.website_url }}<br>
       <label>{{ form.website_name.label }}</label><br>
       {{ form.website_name }}<br><br>
-      <input type="submit" value="Submit" class="uk-button">
+      <input type="submit" value="Submit" class="uk-button uk-width-expand uk-button-secondary">
     </form>
+  </div>
+  <p>For list of saved passwords click <a href="{% url 'ProjectHeart:passwords-page' %}" target="_blank"
+      rel="noopener noreferrer">this link</a></p>
+  {% else %}
+  <div class="uk-text-center">
+    <h3 class="uk-h3">You're not currently logged in</h3>
+    <span class="uk-h4">Try loginon through this <a href="/admin/" target="_blank" rel="noopener noreferrer">link</a>
+      and then you will be able to create
+      passwords</span>
   </div>
   {% endif %}
 </div>
 {% endblock content %}
 
-{% block title %}
-  Home
-{% endblock title %}
+{% block title %}Home{% endblock title %}
