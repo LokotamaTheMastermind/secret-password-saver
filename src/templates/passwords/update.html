@@ -1,0 +1,23 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}Password Update{% endblock title %}
+
+{% block content %}
+<!-- Main content -->
+<div class="uk-container">
+    <h1 class="uk-h1 uk-text-center uk-margin-medium-top">Update Password</h1>
+    <hr class="uk-hr">
+    <form action="{% url 'ProjectHeart:password-update' id %}" method="POST">
+        {% csrf_token %}
+        {% for input in form %}
+        <div class="uk-margin-small-top"></div>
+        <label class="uk-form-label">{{ input.label }}</label>
+        {{ input }}
+        {% endfor %}
+        <button type="submit" class="uk-button uk-button-primary uk-margin-small-top uk-width-expand">Update
+            Password</button>
+    </form>
+    <p>For list of saved passwords click <a href="{% url 'ProjectHeart:passwords-page' %}" target="_blank"
+            rel="noopener noreferrer">this link</a></p>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}Search Query - {{ query }}{% endblock title %}
+
+{% block content %}
+<div class="uk-container uk-margin-medium-top">
+    <h1 class="uk-h1 uk-text-center">Results - {{ query }}</h1>
+    <hr class="uk-hr">
+    {% if not empty %}
+    <table class="uk-table uk-table-striped">
+        <tbody>
+            <tr>
+                <th>Website Name</th>
+                <th>Website URI</th>
+                <th>Actual Password</th>
+                <th>Hashed Password</th>
+                <th>Actions</th>
+            </tr>
+            {% for password in passwords %}
+            <tr>
+                <td>{{ password.website_name }}</td>
+                <td><a href="{{ password.website_url }}">{{ password.website_url }}</a></td>
+                <td>{{ password.password }}</td>
+                <td>{{ password.password_hashed }}</td>
+                <th><a href="{% url 'ProjectHeart:password-delete' password.id %}"><button
+                            class="uk-button uk-button-danger uk-button-small">Delete</button></a></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <span class="uk-h4">Please return to the <a href="{% url 'ProjectHeart:home-page' %}">home page</a> to create a
+        password or go
+        to <a href="{% url 'ProjectHeart:passwords-page' %}">passwords</a> page for full list of passwords</span>
+    {% else %}
+    <div class="uk-text-center">
+        <h3 class="uk-h3">Sorry cannot find the password you searched for</h3>
+        <span class="uk-h4">Please return to the <a href="{% url 'ProjectHeart:home-page' %}">home page</a> to create a
+            password or go
+            to <a href="{% url 'ProjectHeart:passwords-page' %}">passwords</a> page for full list of passwords</span>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
