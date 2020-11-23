@@ -17,7 +17,11 @@
     <form action="" method="post">
       {% csrf_token %}
       <label>{{ form.password.label }}</label><br>
-      {{ form.password }}<br>
+      <div class="uk-flex">
+        {{ form.password }}
+        <div class="uk-margin-small-left"></div>
+        <span class="uk-float-right uk-margin-small-top"><i class="fa fa-eye password-toggle" onclick="togglePassword()" id="togglePassword"></i> Show password<br></span>
+      </div>
       <label>{{ form.website_url.label }}</label><br>
       {{ form.website_url }}<br>
       <label>{{ form.website_name.label }}</label><br>

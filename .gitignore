@@ -1,3 +1,6 @@
 migrations/
 __pycache__/
 *.sqlite3
+*.code-workspace
+secret-password-saver-development/
+.idea/
