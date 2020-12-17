@@ -1,11 +1,11 @@
-from clint.textui import colored, puts, indent
+from clint.textui import colored, puts
 from PyInquirer import prompt
 import time
 import os
 import platform
+import webbrowser
 
 op = platform.system()
-
 
 questions = [
     {
@@ -14,12 +14,7 @@ questions = [
         "message": "Name of user for logging and logging out"
     },
     {
-        "type": "password",
-        "name": "admin_page_password",
-        "message": "* Password for user logging in and out"
-    },
-    {
-        "type": "email",
+        "type": "input",
         "name": "admin_page_email",
         "message": "Email for admin user",
     }
@@ -38,19 +33,37 @@ else:
 
 time.sleep(10)
 
-puts(colored.blue('Nearly done with the setup, it is about 95\\% done'))
+print()
+
+puts(colored.blue('Nearly done with the setup, it is about 95% done'))
 
 puts(colored.yellow(
     "Please if you don't mind fill in this prompts so as to finish the setup"))
 
+print()
+
 anwsers = prompt(questions)
 
 email = anwsers['admin_page_email']
-password = anwsers['admin_page_password']
 username = anwsers['admin_page_username']
 
 if email == "":
-    email = "{}.secret-password-saver-development.localhost".format(username)
+    email = "{}.secret-password-saver-development@localhost".format(username)
+
+print()
+
+puts(colored.blue('To finish the setup add your password'))
+time.sleep(2)
 
 os.system(
-    'python manage.py createsuperuser --email={} --username={}'.format(email, username))
+    'cd src && python manage.py createsuperuser --email={} --username={}'.format(email, username))
+
+print()
+
+os.system('cls')
+
+puts(colored.green('Done starting server and opening browser'))
+
+webbrowser.open('http://localhost:5000')
+
+os.system('cd src && python manage.py runserver 5000')

@@ -3,6 +3,8 @@ from .forms import PasswordsForm
 from django.contrib.auth.decorators import login_required
 from .models import Passwords
 from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 
 
 # Homepage view
@@ -21,6 +23,12 @@ def index(request):
         "created": created
     }
     return render(request, "home/home.html", context)
+
+
+# Logout view
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 # Password list

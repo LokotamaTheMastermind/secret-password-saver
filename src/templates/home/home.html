@@ -20,7 +20,8 @@
       <div class="uk-flex">
         {{ form.password }}
         <div class="uk-margin-small-left"></div>
-        <span class="uk-float-right uk-margin-small-top"><i class="fa fa-eye password-toggle" onclick="togglePassword()" id="togglePassword"></i> Show password<br></span>
+        <span class="uk-float-right uk-margin-small-top"><i class="fa fa-eye password-toggle" onclick="togglePassword()"
+            id="togglePassword"></i> Show password<br></span>
       </div>
       <label>{{ form.website_url.label }}</label><br>
       {{ form.website_url }}<br>
@@ -29,8 +30,13 @@
       <input type="submit" value="Submit" class="uk-button uk-width-expand uk-button-secondary">
     </form>
   </div>
-  <p>For list of saved passwords click <a href="{% url 'ProjectHeart:passwords-page' %}" target="_blank"
-      rel="noopener noreferrer">this link</a></p>
+  <span>
+    <p>For list of saved passwords click <a href="{% url 'ProjectHeart:passwords-page' %}" target="_blank"
+        rel="noopener noreferrer">this link</a> <span class="uk-align-right"><a
+          href="{% url 'ProjectHeart:logout-view' %}">Logout <i class="fa fa-long-arrow-alt-right"></i></a></span>
+    </p>
+    <p>For the list of important passwords click <a href="#">this link</a></p>
+  </span>
   {% else %}
   <div class="uk-text-center">
     <h3 class="uk-h3">You're not currently logged in</h3>

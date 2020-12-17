@@ -5,6 +5,7 @@ app_name = 'ProjectHeart'
 
 urlpatterns = [
     path('', index, name='home-page'),
+    path('logout/', logout_view, name='logout-view'),
     path('passwords/', passwords, name='passwords-page'),
     path('passwords/delete/<int:id>', password_delete, name='password-delete'),
     path('passwords/update/<int:id>', password_update, name='password-update'),
