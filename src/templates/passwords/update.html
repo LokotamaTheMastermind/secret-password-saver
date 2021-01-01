@@ -1,11 +1,11 @@
 {% extends 'shared/base.html' %}
 
-{% block title %}Password Update{% endblock title %}
+{% block title %}Update{% endblock title %}
 
 {% block content %}
 <!-- Main content -->
 <div class="uk-container">
-    <h1 class="uk-h1 uk-text-center uk-margin-medium-top">Update Password</h1>
+    <h1 class="uk-h1 uk-text-center uk-margin-medium-top">Update Credential</h1>
     <hr class="uk-hr">
     <form action="{% url 'ProjectHeart:password-update' id %}" method="POST">
         {% csrf_token %}
