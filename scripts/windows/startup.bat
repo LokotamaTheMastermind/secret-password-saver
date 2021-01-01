@@ -1,1 +1,1 @@
-cd ../../ && python manage.py runserver 100
+cd ../../ && python src/manage.py runserver 100
