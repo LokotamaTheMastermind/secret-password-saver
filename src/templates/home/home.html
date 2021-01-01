@@ -1,8 +1,10 @@
 {% extends 'shared/base.html' %}
 
+{% block title %}Home{% endblock title %}
+
 {% block content %}
 <!-- Main content -->
-<div class="uk-container uk-margin-medium-top">
+<div class="uk-container uk-margin-small-top">
   {% if created %}
   <div class="uk-card uk-card-primary">
     <div class="uk-card-body uk-text-light">
@@ -10,12 +12,16 @@
     </div>
   </div>
   {% endif %}
-  <h1 class="uk-h1 uk-text-center">Easy Password Saver</h1>
+  <h1 class="uk-h1 uk-text-center">Credential Saver</h1>
   <hr class="uk-hr uk-align-center">
   {% if request.user.is_authenticated %}
   <div class="uk-column">
     <form action="" method="post">
       {% csrf_token %}
+      <label>{{ form.username.label }}</label>
+      {{ form.username }}
+      <label>{{ form.email.label }}</label>
+      {{ form.email }}
       <label>{{ form.password.label }}</label><br>
       <div class="uk-flex">
         {{ form.password }}
@@ -35,7 +41,6 @@
         rel="noopener noreferrer">this link</a> <span class="uk-align-right"><a
           href="{% url 'ProjectHeart:logout-view' %}">Logout <i class="fa fa-long-arrow-alt-right"></i></a></span>
     </p>
-    <p>For the list of important passwords click <a href="#">this link</a></p>
   </span>
   {% else %}
   <div class="uk-text-center">
@@ -47,5 +52,3 @@
   {% endif %}
 </div>
 {% endblock content %}
-
-{% block title %}Home{% endblock title %}

@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from .forms import PasswordsForm
 from django.contrib.auth.decorators import login_required
@@ -5,6 +6,7 @@ from .models import Passwords
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
 
 
 # Homepage view
@@ -16,6 +18,7 @@ def index(request):
         if request.user.is_authenticated:
             if form.is_valid:
                 form.save()
+                form = PasswordsForm()
                 created = True
 
     context = {
@@ -35,14 +38,27 @@ def logout_view(request):
 @login_required
 def passwords(request):
     passwords = Passwords.objects.all().order_by('website_name')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(passwords, 5)
+    number_of_results = paginator.count
+
+    try:
+        passwords = paginator.page(page)
+    except PageNotAnInteger:
+        passwords = paginator.page(1)
+    except EmptyPage:
+        passwords = paginator.page(paginator.num_pages)
 
     if not passwords:
         empty = True
     elif passwords:
         empty = False
+
     context = {
         'passwords': passwords,
-        'empty': empty
+        'empty': empty,
+        'num_of_results': number_of_results,
     }
     return render(request, "passwords/passwords.html", context)
 

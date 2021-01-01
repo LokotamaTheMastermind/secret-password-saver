@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ProjectHeart',
     'Search',
-    'StarredPasswords',
 ]
 
 
@@ -64,21 +63,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PasswordVault.wsgi.application'
 
-# Uncomment this to use sqlite3 database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'secret-password-saver',
+        'NAME': 'credential-saver',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5433',
     }
 }

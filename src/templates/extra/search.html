@@ -12,25 +12,55 @@
             <tr>
                 <th>Website Name</th>
                 <th>Website URI</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>Actual Password</th>
-                <th>Hashed Password</th>
                 <th>Actions</th>
             </tr>
-            {% for password in passwords %}
+            {% for result in results %}
             <tr>
-                <td>{{ password.website_name }}</td>
-                <td><a href="{{ password.website_url }}">{{ password.website_url }}</a></td>
-                <td>{{ password.password }}</td>
-                <td>{{ password.password_hashed }}</td>
-                <th><a href="{% url 'ProjectHeart:password-delete' password.id %}"><button
-                            class="uk-button uk-button-danger uk-button-small">Delete</button></a></th>
+                <td>{{ result.website_name }}</td>
+                <td><a href="{{ result.website_url }}">{{ result.website_url }}</a></td>
+                <td>{{ result.username }}</td>
+                <td>{{ result.email }}</td>
+                <td>{{ result.password }}</td>
+                <th><a href="{% url 'ProjectHeart:password-delete' result.id %}"><button
+                            class="uk-button uk-button-danger uk-button-small uk-width-expand">Delete</button></a></th>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <span class="uk-h4">Please return to the <a href="{% url 'ProjectHeart:home-page' %}">home page</a> to create a
-        password or go
-        to <a href="{% url 'ProjectHeart:passwords-page' %}">passwords</a> page for full list of passwords</span>
+    {% if results.has_other_pages %}
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center">
+        {% if results.has_previous %}
+        <li class="page-item"><a href="?page={{ results.previous_page_number }}" class="page-link">&laquo;</a></li>
+        {% else %}
+        <li class="disabled page-item page-link"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in results.paginator.page_range %}
+        {% if results.number == i %}
+        <li class="active page-item page-link "><span>{{ i }} <span class="sr-only">(current)</span></span>
+        </li>
+        {% else %}
+        <li class="page-item "><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if results.has_next %}
+        <li class="page-item "><a href="?page={{ results.next_page_number }}" class="page-link">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="disabled page-item page-link default-"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    <div>
+        <span class="uk-h5">
+            <a href="{% url 'ProjectHeart:passwords-page' %}"><i class="fa fa-long-arrow-alt-left"></i> Go back to
+                credentials view</a>
+            <span class="uk-align-right">Total results <code>{{ results.count }}</code></span>
+        </span>
+    </div>
     {% else %}
     <div class="uk-text-center">
         <h3 class="uk-h3">Sorry cannot find the password you searched for</h3>
